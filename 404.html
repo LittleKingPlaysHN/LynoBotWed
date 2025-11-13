@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Error 404 - Página no encontrada</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { width:100%; height:100%; font-family: 'Segoe UI', sans-serif; overflow:hidden; }
+
+
+  #particle-canvas {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    background: #000116; 
+  }
+
+
+  .content {
+    position: relative;
+    z-index: 1;
+    text-align:center;
+    top:50%;
+    transform:translateY(-50%);
+    color: #fff;
+  }
+
+  h1 { font-size: 10rem; animation: float 2s infinite ease-in-out; }
+  p { font-size:1.5rem; margin:20px 0; }
+  a {
+    display:inline-block;
+    padding:12px 25px;
+    color:#ffffff;
+    background:#64a7ff;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:bold;
+    transition:0.3s;
+  }
+  a:hover { background:#73beff; }
+
+  @keyframes float {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-20px); }
+  }
+</style>
+</head>
+<body>
+<canvas id="particle-canvas"></canvas>
+<div class="content">
+  <h1>4 0 4</h1>
+  <p>¡Ups! La página que buscas no existe.</p>
+  <a href="index.html">Volver al inicio</a>
+</div>
+
+<script>
+(() => {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles=[], maxP=80;
+
+  function resize(){ W=canvas.width=innerWidth; H=canvas.height=innerHeight; }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function rand(min,max){ return Math.random()*(max-min)+min; }
+
+  function createParticles(){
+    particles=[];
+    const count=Math.min(maxP,Math.floor(W/15));
+    for(let i=0;i<count;i++){
+      particles.push({
+        x:rand(0,W),
+        y:rand(0,H),
+        r:rand(0.8,2.2),
+        vx:rand(-0.3,0.3),
+        vy:rand(-0.3,0.3),
+        hue:rand(190,220),
+        life:rand(40,200)
+      });
+    }
+  }
+  createParticles();
+
+  function step(){
+    ctx.clearRect(0,0,W,H);
+    for(let p of particles){
+      p.x+=p.vx; p.y+=p.vy; p.life-=0.2;
+      if(p.life<0){ p.x=rand(0,W); p.y=rand(0,H); p.life=rand(40,200); }
+
+      ctx.beginPath();
+      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*8);
+      g.addColorStop(0, `hsla(${p.hue},95%,60%,0.12)`);
+      g.addColorStop(0.3, `hsla(${p.hue},95%,60%,0.06)`);
+      g.addColorStop(1, `rgba(0,0,0,0)`);
+      ctx.fillStyle=g;
+      ctx.fillRect(p.x-p.r*8,p.y-p.r*8,p.r*16,p.r*16);
+
+      
+      ctx.beginPath();
+      ctx.fillStyle=`hsla(${p.hue},90%,60%,0.95)`;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const a=particles[i], b=particles[j];
+        const dx=a.x-b.x, dy=a.y-b.y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<110){
+          ctx.beginPath();
+          ctx.strokeStyle=`rgba(46,117,255,${0.08*(1-d/110)})`;
+          ctx.lineWidth=1;
+          ctx.moveTo(a.x,a.y);
+          ctx.lineTo(b.x,b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(step);
+  }
+  step();
+})();
+</script>
+</body>
+</html>

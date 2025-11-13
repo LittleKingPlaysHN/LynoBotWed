@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Documentación de Comandos - Lyno</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+
+.docs-layout {
+  display: flex;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+
+.docs-sidebar {
+  flex: 0 0 250px;
+  background: var(--glass);
+  border-radius: 12px;
+  padding: 20px;
+  position: sticky;
+  top: 90px;
+  height: fit-content;
+}
+.docs-sidebar h3 {
+  color: var(--accent-1);
+  margin-bottom: 12px;
+}
+.docs-sidebar input {
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,145,255,0.3);
+  margin-bottom: 16px;
+  background: #0b0c17;
+  color: var(--muted);
+}
+.docs-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.docs-sidebar ul li a {
+  display: block;
+  padding: 8px 0;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.docs-sidebar ul li a.active,
+.docs-sidebar ul li a:hover {
+  background: rgba(0,145,255,0.2);
+  color: var(--accent-2);
+}
+
+
+.docs-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+
+.cmd-category h2 {
+  color: var(--accent-2);
+  margin-bottom: 12px;
+  font-size: 1.8rem;
+}
+
+
+.cmd-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+.cmd-card {
+  background: var(--glass);
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(61,165,245,0.03);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.cmd-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(61,165,245,0.15);
+}
+.cmd-card h3 {
+  color: var(--accent-1);
+  margin-bottom: 6px;
+}
+.cmd-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+.cmd-card .aliases {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+.cmd-card .example {
+  font-size: 0.8rem;
+  color: var(--accent-1);
+  background: rgba(0,145,255,0.05);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+
+@media (max-width: 1024px) {
+  .docs-layout {
+    flex-direction: column;
+  }
+  .docs-sidebar {
+    width: 100%;
+    position: relative;
+    top: 0;
+    margin-bottom: 20px;
+    padding: 16px;
+  }
+  .docs-sidebar ul li a {
+    padding: 6px 8px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .docs-sidebar {
+    display: none;
+  }
+  .docs-sidebar.show {
+    display: block;
+  }
+  #menu-toggle {
+    display: inline-block;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .cmd-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .cmd-list {
+    grid-template-columns: 1fr;
+  }
+  .cmd-card {
+    width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#">Lyno</a>
+    <button class="btn btn-ghost" id="menu-toggle">☰</button>
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Inicio</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="premiun.html">Premiun</a>
+      <a href="login.html">Servers</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container docs-layout">
+
+  <aside class="docs-sidebar">
+    <h3>Buscar Comando</h3>
+    <input type="text" id="searchInput" placeholder="Buscar...">
+
+    <h3>Categorías</h3>
+    <ul id="categoryList">
+      <li><a href="#Moderacion">Moderación</a></li>
+      <li><a href="#Diversion">Diversión</a></li>
+      <li><a href="#Economia">Economía</a></li>
+      <li><a href="#Utilidades">Utilidades</a></li>
+    </ul>
+  </aside>
+
+  <div class="docs-content">
+
+    <section id="Moderacion" class="cmd-category">
+      <h2>Moderación</h2>
+      <div class="cmd-list">
+  <div class="cmd-card">
+    <h3>/ban &lt;usuario&gt;</h3>
+    <p>Banea a un usuario del servidor.</p>
+    <p class="aliases">Alias: /ban</p>
+    <p class="example">Ej: /ban @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/kick &lt;usuario&gt;</h3>
+    <p>Expulsa a un usuario.</p>
+    <p class="aliases">Alias: /kick</p>
+    <p class="example">Ej: /kick @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/mute &lt;usuario&gt;</h3>
+    <p>Silencia temporalmente a un usuario.</p>
+    <p class="aliases">Alias: /mute</p>
+    <p class="example">Ej: /mute @Usuario 10m</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/unmute &lt;usuario&gt;</h3>
+    <p>Quita el silencio a un usuario.</p>
+    <p class="aliases">Alias: /umute</p>
+    <p class="example">Ej: /unmute @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/warns &lt;usuario&gt;</h3>
+    <p>Envía una advertencia a un usuario.</p>
+    <p class="aliases">Alias: /warns</p>
+    <p class="example">Ej: /warns @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/clear &lt;cantidad&gt;</h3>
+    <p>Elimina mensajes en un canal.</p>
+    <p class="aliases">Alias: /clear</p>
+    <p class="example">Ej: /clear 10</p>
+  </div>
+</div>
+
+    </section>
+
+    <section id="Diversion" class="cmd-category">
+      <h2>Diversión</h2>
+      <div class="cmd-list">
+  <div class="cmd-card">
+    <h3>/gay &lt;usuario&gt;</h3>
+    <p>Prueba que tan LGBT son tus migos</p>
+    <p class="aliases">Alias: /fun</p>
+    <p class="example">Ej: /fun @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/fun &lt;Siuu&gt;</h3>
+    <p>Sale El Bicho Diciendo Siuuu</p>
+    <p class="aliases">Alias: /fun</p>
+    <p class="example">Ej: /fun siuu</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/banana &lt;usuario&gt;</h3>
+    <p>Midele la banana a alguien o a ti mismo</p>
+    <p class="aliases">Alias: /fun</p>
+    <p class="example">Ej: /fun banana @Usuario 10m</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/simp &lt;usuario&gt;</h3>
+    <p>Prueba que tam SIMP-ATICO es tus amigos</p>
+    <p class="aliases">Alias: /fun</p>
+    <p class="example">Ej: /fun simp @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/navidad &lt;usuario&gt;</h3>
+    <p>Calcula Cuantos Dias hay Para navidad</p>
+    <p class="aliases">Alias: /fun</p>
+    <p class="example">Ej: /fun navidad</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/match &lt;usuario&gt;</h3>
+    <p>Genera un avatar hasta con 4 avatars</p>
+    <p class="aliases">Alias: //fun</p>
+    <p class="example">Ej: //fun match @usuario</p>
+  </div>
+</div>
+    </section>
+
+    <section id="Economia" class="cmd-category">
+      <h2>Economía</h2>
+      <div class="cmd-list">
+  <div class="cmd-card">
+    <h3>/payday &lt;Server&gt;</h3>
+    <p>Pagales la quinsea a todo el servidor.</p>
+    <p class="aliases">Alias: /eco</p>
+    <p class="example">Ej: /eco payday @todos</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/eco &lt;work&gt;</h3>
+    <p>Trabaja y gana dinero virtual Con lyno</p>
+    <p class="aliases">Alias: /eco</p>
+    <p class="example">Ej: /eco work</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/daily  &lt;24 Horas&gt;</h3>
+    <p>Reclama tu recompensa diaria</p>
+    <p class="aliases">Alias: /eco</p>
+    <p class="example">Ej: /eco daily</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/inventario  &lt;usuario&gt;</h3>
+    <p>Muestra el Invitario De Alguien o El tuyo</p>
+    <p class="aliases">Alias: /eco</p>
+    <p class="example">Ej: /eco inventario @Usuario</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/omprar &lt;item&gt;</h3>
+    <p>Compra un Objeto De La Shop</p>
+    <p class="aliases">Alias: /eco</p>
+    <p class="example">Ej: /eco comprar @item</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/banco &lt;cantidad&gt;</h3>
+    <p>Deposita Tu Dinero O Sacalo para comprar</p>
+    <p class="aliases">Alias: /eco</p>
+    <p class="example">Ej: /eco comprar @cantidad</p>
+  </div>
+</div>
+    </section>
+
+    <section id="Utilidades" class="cmd-category">
+      <h2>Utilidades</h2>
+     <div class="cmd-list">
+  <div class="cmd-card">
+    <h3>/automod &lt;opcion&gt;</h3>
+    <p>Automoderacion para tu servidor.</p>
+    <p class="aliases">Alias: /automod</p>
+    <p class="example">Ej: /automod @opcion</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/ticket &lt;opcion&gt;</h3>
+    <p>Crea un panel personalizados para tickets.</p>
+    <p class="aliases">Alias: /ticket</p>
+    <p class="example">Ej: /ticket @opcion</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/bienvenidas &lt;opcion&gt;</h3>
+    <p>Crea o configura el sistema de bienvenidas</p>
+    <p class="aliases">Alias: /bienvenidas</p>
+    <p class="example">Ej: /bienvenidas @opcion</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/conteo &lt;opcion&gt;</h3>
+    <p>Configura el sistema de conteo en tu servidor.</p>
+    <p class="aliases">Alias: /conteo</p>
+    <p class="example">Ej: /conteo @opcion</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/giveways &lt;opcion&gt;</h3>
+    <p>Sorteales Algo a tu comunidad con lyno</p>
+    <p class="aliases">Alias: /give</p>
+    <p class="example">Ej: /giveways @opcion</p>
+  </div>
+  <div class="cmd-card">
+    <h3>/pokemon &lt;opcion&gt;</h3>
+    <p>Crea un sistema de pokemon en tu servidor</p>
+    <p class="aliases">Alias: /pokemon</p>
+    <p class="example">Ej: /pokemon @opcion</p>
+  </div>
+</div>
+    </section>
+
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-container">
+    <p style="text-align:center; color:#ccc;">© 2025 La Realeza Studios</p>
+  </div>
+</footer>
+
+<script src="script.js" defer></script>
+<script>
+
+const menuToggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('main-nav');
+menuToggle.addEventListener('click', () => {
+  nav.classList.toggle('show');
+});
+
+
+const sections = document.querySelectorAll('.cmd-category');
+const sidebarLinks = document.querySelectorAll('.docs-sidebar ul li a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 120;
+    if(scrollY >= sectionTop) current = section.getAttribute('id');
+  });
+  sidebarLinks.forEach(link => {
+    link.classList.remove('active');
+    if(link.getAttribute('href') === '#' + current) link.classList.add('active');
+  });
+});
+
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', () => {
+  const filter = searchInput.value.toLowerCase();
+  document.querySelectorAll('.cmd-card').forEach(card => {
+    const text = card.textContent.toLowerCase();
+    card.style.display = text.includes(filter) ? '' : 'none';
+  });
+});
+
+const sidebar = document.querySelector('.docs-sidebar');
+menuToggle.addEventListener('click', () => {
+  sidebar.classList.toggle('show');
+});
+</script>
+</body>
+</html>

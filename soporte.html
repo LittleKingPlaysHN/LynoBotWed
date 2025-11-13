@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soporte - Lyno</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+
+body { margin:0; font-family:'Inter', system-ui, -apple-system, Roboto, 'Segoe UI', Arial; background-color:#0b0c17; color:var(--text); overflow-x:hidden; }
+.container { max-width:1100px; margin:0 auto; padding:28px; text-align:center; position:relative; z-index:10; }
+#particle-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; mix-blend-mode:screen; opacity:0.9; }
+
+
+.hero { padding:100px 20px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+.hero h1 { font-size:3rem; color:var(--accent-2); }
+.hero p { color:var(--muted); font-size:1.2rem; max-width:600px; line-height:1.5; }
+
+
+.btn-primary { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); color:#fff; padding:16px 28px; border:none; border-radius:12px; font-weight:600; cursor:pointer; text-decoration:none; transition: all 0.3s ease; display:inline-block; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow:0 6px 18px rgba(0,81,119,0.3); }
+
+@media(max-width:700px){ .hero h1 { font-size:2rem; } .hero p { font-size:1rem; } }
+</style>
+</head>
+<body>
+
+<canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+<div class="container hero">
+  <h1>Soporte de Lyno</h1>
+  <p>Si necesitas ayuda, soporte técnico o tienes dudas sobre Lyno, haz clic en el botón para unirte a nuestro servidor de Discord.</p>
+  <a class="btn-primary" href="https://discord.gg/CSWHyHkRKm" target="_blank">Unirse a Discord</a>
+</div>
+
+<script>
+
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let w = canvas.width = window.innerWidth;
+let h = canvas.height = window.innerHeight;
+window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; });
+
+const particles = [];
+for(let i=0;i<100;i++){
+  particles.push({x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-0.5)*0.5, vy: (Math.random()-0.5)*0.5, r: Math.random()*2+1});
+}
+
+function animate(){
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p=>{
+    p.x += p.vx; p.y += p.vy;
+    if(p.x<0||p.x>w) p.vx*=-1;
+    if(p.y<0||p.y>h) p.vy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,145,255,0.5)';
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Lyno Bot</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+    :root {
+      --bg-1: #0b0c17;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.7);
+      --accent-1: #0095ff;
+      --accent-2: #00aeff;
+      --glass: rgba(11,12,23,0.8);
+      --radius: 12px;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-1);
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      flex-direction: column;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    #particle-canvas {
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      z-index:0; pointer-events:none;
+      mix-blend-mode: screen; opacity:0.9;
+    }
+
+    .logo-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 20px;
+      z-index:1;
+    }
+    .logo-container img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      display: block;
+      object-fit: cover;
+      position: relative;
+      z-index:2;
+    }
+    .logo-container::before {
+      content:"";
+      position:absolute;
+      top:50%; left:50%;
+      width:180px; height:180px;
+      border-radius:50%;
+      box-shadow: 0 0 15px 5px var(--accent-1);
+      animation: glowPulse 2.5s infinite ease-in-out;
+      transform: translate(-50%, -50%);
+      z-index:1;
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 15px 5px var(--accent-1); }
+      50% { box-shadow: 0 0 30px 10px var(--accent-2); }
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      z-index:1;
+    }
+    p {
+      font-weight: 300;
+      margin-bottom: 30px;
+      font-size: 1rem;
+      color: var(--muted);
+      z-index:1;
+    }
+
+    .btn-discord {
+      background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+      color: #fff;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      z-index:1;
+    }
+    .btn-discord:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+    .btn-discord i {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <div class="logo-container">
+    <img src="https://lynobot.wordpress.com/wp-content/uploads/2025/08/b46a8a3bf6acb271b9b08d2745a14e6e.webp" alt="Logo Lyno Bot" />
+  </div>
+
+  <h1>¡Bienvenid@s al panel de Lyno Bot!</h1>
+  <p>Para continuar ingresa con tu cuenta de Discord y ver los servers disponibles</p>
+
+  <a href="https://discord.com/oauth2/authorize?client_id=1398492279194390578&redirect_uri=https://lynobot.vercel.app/servers.html&response_type=token&scope=identify%20guilds" class="btn-discord">
+    <i class='bx bxl-discord'></i> Iniciar sesión con Discord
+  </a>
+
+  <script>
+
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+    for(let i=0;i<120;i++){
+      particles.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+1,
+        dx: (Math.random()-0.5)*0.5,
+        dy: (Math.random()-0.5)*0.5
+      });
+    }
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>canvas.width) p.dx*=-1;
+        if(p.y<0||p.y>canvas.height) p.dy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = 'rgba(0,145,255,0.5)';
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    window.addEventListener('resize',()=>{
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+
+</body>
+</html>
+

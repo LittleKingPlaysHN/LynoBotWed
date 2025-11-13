@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monitoreo de Servicios - Lyno</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+
+:root {
+  --glass: rgba(0, 16, 87, 0.164);
+  --accent-1: #00a2ff;
+  --accent-2: #60a5fa;
+  --muted: #cbd5e1;
+}
+
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #04060e;
+  color: #ffffff;
+}
+main {
+  position: relative;
+  z-index: 2;
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+h1 {
+  text-align: center;
+  color: var(--accent-1);
+  margin-bottom: 15px;
+  font-size: 2.5rem;
+  text-shadow: none; 
+}
+p.sub {
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 40px;
+  max-width: 800px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+
+.service-card {
+  background: var(--glass);
+  border-radius: 12px;
+  border: 1px solid rgba(61,165,245,0.03);
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 110, 255, 0.15);
+}
+
+.service-card h3 {
+  color: var(--accent-1);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  text-shadow: none; 
+}
+.service-card .metric {
+  font-size: 1.6rem;
+  color: var(--accent-2);
+  font-weight: 700;
+  margin-bottom: 6px;
+  text-shadow: none; 
+}
+.service-card .sub-metric {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.service-card .desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+#particle-canvas {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:1;
+  background: radial-gradient(circle at top, #0a0f1a 0%, #000 100%);
+}
+
+
+footer {
+  text-align:center;
+  padding:20px;
+  color:#008cff;
+  margin-top:50px;
+}
+
+@media(max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width: 700px) { .services-grid { grid-template-columns: 1fr; } }
+
+</style>
+</head>
+<body>
+<canvas id="particle-canvas"></canvas>
+
+<header class="site-header">
+  <div class="container">
+    <a class="logo" href="#">Lyno</a>
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Inicio</a>
+      <a href="docs.html">Docs</a>
+      <a href="premiun.html">Premiun</a>
+      <a href="soporte.html">Soporte</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <h1>Monitoreo de Servicios en Tiempo Real</h1>
+  <p class="sub">Transparencia total con métricas precisas de todos nuestros servicios para máxima confiabilidad.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Lyno Bot</h3>
+      <p class="metric" id="bot-uptime">99.95%</p>
+      <p class="sub-metric">Uptime (30 días)</p>
+      <p class="desc">Sistema principal operativo. Latencia promedio: <span id="bot-ping">16</span> ms.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Base De Datos</h3>
+      <p class="metric" id="mongo-connections">41</p>
+      <p class="sub-metric">Tablas Activas</p>
+      <p class="desc">MySQL distribuido funcionando perfectamente. Tiempo de respuesta: 3ms.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Servidores</h3>
+      <p class="metric" id="servers-count">1,234</p>
+      <p class="sub-metric">Servidores activos</p>
+      <p class="desc">Número de servidores monitoreados en tiempo real. Todos funcionando correctamente.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Página Web</h3>
+      <p class="metric" id="web-uptime">99.99%</p>
+      <p class="sub-metric">Uptime (30 días)</p>
+      <p class="desc">Nuestra página web siempre está en línea y disponible para todos los usuarios.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>API De Comandos</h3>
+      <p class="metric" id="api-ping">18</p>
+      <p class="sub-metric">Ping promedio</p>
+      <p class="desc">API principal respondiendo correctamente. Latencia estable entre 15-20ms.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>Usuarios</h3>
+      <p class="metric" id="users-count">56,789</p>
+      <p class="sub-metric">Usuarios encontrados</p>
+      <p class="desc">Todos los usuarios registrados en nuestros servicios en las últimas 24 horas.</p>
+    </div>
+  </div>
+</main>
+
+<footer>© 2025 La Realeza Studios</footer>
+
+<script>
+  const canvas = document.getElementById("particle-canvas");
+  const ctx = canvas.getContext("2d");
+  let particlesArray;
+
+  function initParticles() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particlesArray = [];
+    const num = Math.floor((canvas.width * canvas.height) / 20000);
+    for (let i = 0; i < num; i++) {
+      const size = Math.random() * 2 + 1;
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height;
+      const speedX = (Math.random() - 0.5) * 0.4;
+      const speedY = (Math.random() - 0.5) * 0.4;
+      particlesArray.push({ x, y, size, speedX, speedY });
+    }
+  }
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(59,130,246,0.5)";
+    particlesArray.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+      ctx.fill();
+      p.x += p.speedX;
+      p.y += p.speedY;
+      if(p.x <0||p.x>canvas.width) p.speedX*=-1;
+      if(p.y<0||p.y>canvas.height) p.speedY*=-1;
+    });
+    requestAnimationFrame(animateParticles);
+  }
+
+  window.addEventListener("resize", initParticles);
+  initParticles();
+  animateParticles();
+
+  function slowUpdate(id, min, max, suffix="", interval=60000){
+    const el = document.getElementById(id);
+    setInterval(()=>{
+      const val = (Math.random()*(max-min)+min).toFixed(suffix==="%"?2:0);
+      el.textContent = val+suffix;
+    }, interval);
+  }
+
+  function dynamicUpdate(id, minChange, maxChange, suffix="", interval=3000){
+    const el = document.getElementById(id);
+    setInterval(()=>{
+      let current = parseFloat(el.textContent) || 0;
+      const change = (Math.random()*(maxChange-minChange)+minChange);
+      const newVal = current + (Math.random()<0.5 ? -change : change);
+      el.textContent = suffix==="%" ? newVal.toFixed(2)+suffix : Math.round(newVal)+suffix;
+    }, interval);
+  }
+
+
+  dynamicUpdate("bot-uptime", 0.01, 0.05, "%", 3000);
+  dynamicUpdate("web-uptime", 0.01, 0.05, "%", 3000);
+  dynamicUpdate("bot-ping", 1, 2, " ms", 5000);
+  dynamicUpdate("api-ping", 1, 2, " ms", 5000);
+
+  slowUpdate("mongo-connections", 900, 950, "", 300000);
+
+
+</script>
+</body>
+</html>

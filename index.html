@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lyno — Bot Discord</title>
+  <meta name="description" content="Landing amigable para tu bot — azul, negro y gris con efectos suaves." />
+  <meta name="keywords" content="bot Discord, landing bot, Lyno, Discord bot español" />
+  <meta name="author" content="Tu Nombre o Tu Marca" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="Lyno — Bot Discord" />
+  <meta property="og:description" content="Tu Amigo Y Seguro Compañero LynoBot,
+”Bot multipropósito. Mi objetivo es hacer que tu servidor sea más entretenido y seguro" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://lynobot.wordpress.com/wp-content/uploads/2025/08/b46a8a3bf6acb271b9b08d2745a14e6e.webp" />
+  <meta property="og:url" content="https://lynobot.vercel.app" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="#">Lyno</a>
+
+      <nav class="nav" id="main-nav">
+        <a href="#inicio">Inicio</a>
+        <a href="docs.html">Sobre</a>
+        <a href="premium.html">Premium</a>
+        <a href="estado.html">Estado</a>
+        <a href="soporte.html">Contacto</a>
+      </nav>
+
+      <button class="btn btn-ghost" id="menu-toggle" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="inicio" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-left">
+          <h1>Conoce a Lyno</h1>
+          <p class="lead">Un bot poderoso, amigable y con estilo — pensado para servidores que quieren estética y utilidad.</p>
+
+          <div class="hero-cta">
+  <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1398492279194390578&permissions=8&scope=bot%20applications.commands" target="_blank">
+    Invitar Bot
+  </a>
+  <a class="btn btn-outline" href="https://lynoobot.netlify.app/login">Ver Servidores</a>
+</div>
+
+          <div class="stats">
+            <div><strong id="stat-servers">—</strong><span>Servidores</span></div>
+            <div><strong id="stat-users">—</strong><span>Usuarios</span></div>
+            <div><strong id="stat-uptime">99.9%</strong><span>Uptime</span></div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="card mock-terminal">
+            <div class="term-top">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
+            </div>
+            <pre><code id="terminal">> Cmds
+• /welcome — Sistema De Bienvenidas
+• /bot — Información de el bot
+• /eco — Sistema De Economia
+• /giveways — Sistema de Sorteos</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+<section id="sobre" class="section">
+  <div class="container reveal">
+    <div class="sobre-intro">
+      <h2 class="titulo-azul">Características potentes</h2>
+      <p class="subtitulo">Diseñado para combinar apariencia moderna con utilidades para administración, comunidad y diversión.</p>
+    </div>
+
+    <div class="cards-grid">
+      <article class="card">
+        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Sistema Automod</h3>
+        <p>Moderación automatizada inteligente con filtros personalizados, palabras de lista negra y detección inteligente.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon"><i class="fas fa-tools"></i></div>
+        <h3>Herramientas de moderación</h3>
+        <p>Moderación integral con advertencias, tiempos de espera, gestión de canales y controles de roles.</p>
+      </article>
+
+      <article class="card">
+        <div class="card-icon"><i class="fas fa-server"></i></div>
+        <h3>Gestión de servidores</h3>
+        <p>Utilidades completas que incluyen tickets, registro, roles personalizados y gestión de incrustaciones.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+ <section id="rapido" class="section">
+<section class="start-card reveal">
+  <div class="start-card-inner">
+    <h2>Comience en minutos</h2>
+    <p class="muted">Configurar Lyno es rápido y sencillo. Siga estos sencillos pasos para comenzar.</p>
+
+    <div class="steps-horizontal">
+      <div class="step-h">
+        <div class="step-icon"><i class="fas fa-rocket"></i></div>
+        <h4>Invitar bot</h4>
+        <p>Haga clic en el enlace de invitación y seleccione su servidor.</p>
+      </div>
+
+      <span class="divider">|</span>
+
+      <div class="step-h">
+        <div class="step-icon"><i class="fas fa-cogs"></i></div>
+        <h4>Establecer permisos</h4>
+        <p>Otorgue los permisos necesarios para la funcionalidad completa.</p>
+      </div>
+
+      <span class="divider">|</span>
+
+      <div class="step-h">
+        <div class="step-icon"><i class="fas fa-check-circle"></i></div>
+        <h4>Comience a usar</h4>
+        <p>Utilice comandos de barra diagonal para acceder a todas las funciones.</p>
+      </div>
+    </div>
+
+
+<div class="start-cta" style="justify-content:center; margin-top:30px; flex-wrap: wrap;">
+  <button class="btn btn-primary" id="https://discord.com/oauth2/authorize?client_id=1398492279194390578&permissions=8&scope=bot%20applications.commands">Invitar ahora</button>
+  <a class="btn btn-outline" href="docs.html">Ver comandos</a>
+</div>
+  </div>
+</section>
+
+
+<section id="servers" class="section">
+  <div class="container reveal">
+
+    <div class="servers-intro">
+      <h2>Gracias por confiar en Lyno</h2>
+      <p>Son <strong>1,200 Mil</strong> los servidores que usan nuestro bot cada día</p>
+    </div>
+
+
+    <div class="servers-grid">
+      <div class="server-card">
+        <img src="https://lynobot.wordpress.com/wp-content/uploads/2025/10/9fd218138939351.6227601b517a0.gif" alt="Servidor 1" class="server-icon">
+        <div class="server-info">
+          <h4>Behance</h4>
+          <p>Usuarios: 22,659</p>
+        </div>
+      </div>
+
+      <div class="server-card">
+        <img src="https://lynobot.wordpress.com/wp-content/uploads/2025/10/00ff226db7e4b56efdb3ace06ea9e8c32250f0b9b46e8723ff4781527e7dafdc.png" alt="Servidor 2" class="server-icon">
+        <div class="server-info">
+          <h4>My User</h4>
+          <p>Usuarios: 55,678</p>
+        </div>
+      </div>
+
+      <div class="server-card">
+        <img src="https://lynobot.wordpress.com/wp-content/uploads/2025/10/7f1075138939351.6227601b4f636.gif" alt="Servidor 3" class="server-icon">
+        <div class="server-info">
+          <h4>Star Power</h4>
+          <p>Usuarios: 91,011</p>
+        </div>
+      </div>
+
+      <div class="server-card">
+        <img src="https://lynobot.wordpress.com/wp-content/uploads/2025/10/glitch-profile-picture-animated-blue-2.webp" alt="Servidor 4" class="server-icon">
+        <div class="server-info">
+          <h4>Samp Mods</h4>
+          <p>Usuarios: 12,345</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   
+</section>
+
+    <section id="comandos" class="section">
+  <div class="container reveal">
+    <h2>¿Listo para transformar su servidor?</h2>
+    <p class="muted">
+      Únase a miles de servidores que ya utilizan <strong>Lyno</strong> para crear mejores comunidades de Discord.
+    </p>
+
+    <div class="final-buttons">
+      <a href="https://discord.com/oauth2/authorize?client_id=1398492279194390578&permissions=8&scope=bot%20applications.commands" class="btn btn-primary">Agregar a Discord</a>
+      <a href="docs.html" class="btn btn-outline">Ver comandos</a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto" class="section alt">
+  <div class="container reveal contact-container">
+    <h2 class="titulo-azul">Contacto & Soporte</h2>
+    <p class="muted">¿Necesitas ayuda o quieres personalizaciones? Contáctanos.</p>
+
+    <form id="contact-form" class="contact-form">
+      <input type="text" name="name" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu email" required>
+      <textarea name="message" rows="4" placeholder="Mensaje..." required></textarea>
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+        <button class="btn btn-ghost" type="button" id="copy-invite">Copiar enlace de invitación</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById("contact-form");
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = form.name.value;
+  const email = form.email.value;
+  const message = form.message.value;
+
+  const webhookURL = "https://discord.com/api/webhooks/1427886932691783711/XxYnna-Tkm_6dhB0UREDpoHN6VZQdifJZuZDwWwQhI8qdECagQDkNy0oLgusH9I3p0hZ";
+
+  const payload = {
+    content: null,
+    embeds: [{
+      title: "Nuevo mensaje de contacto",
+      color: 5814783,
+      fields: [
+        { name: "Nombre", value: name, inline: true },
+        { name: "Email", value: email, inline: true },
+        { name: "Mensaje", value: message }
+      ],
+      timestamp: new Date()
+    }]
+  };
+
+  try {
+    const response = await fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    if (response.ok) {
+      showToast("Mensaje enviado correctamente!");
+      form.reset();
+    } else {
+      showToast("Error al enviar el mensaje.");
+    }
+  } catch (err) {
+    console.error(err);
+    showToast("Ocurrió un error al enviar el mensaje.");
+  }
+});
+</script>
+</body>
+ </main>
+ 
+ <footer class="site-footer">
+<div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-logo-block">
+        <img src="https://lynobot.wordpress.com/wp-content/uploads/2025/08/b46a8a3bf6acb271b9b08d2745a14e6e.webp" alt="BlueBot Logo" class="logo-img">
+        <p class="footer-desc">
+          Un bot 100% Creado con mucho amor dispuesto a mantener<br>
+        La actividad y seguridad en tu servidor.
+        </p>
+      </div>
+
+
+      <div class="footer-links">
+        <div class="footer-column">
+          <h4>Recursos</h4>
+          <ul>
+            <li><a href="https://patreon.com/LynoBot">Patreon</a></li>
+            <li><a href="docs.html">Dosc</a></li>
+            <li><a href="galeria.html">Galería</a></li>
+            <li><a href="estado.html">Estado</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Soporte</h4>
+          <ul>
+            <li><a href="soporte.html">Servidor de soporte</a></li>
+            <li><a href="premium.html">Premiun</a></li>
+            <li><a href="#contacto">Reportes</a></li>
+            <li><a href="#servers">Partners</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="terms.pdf">Términos de uso</a></li>
+            <li><a href="privacy.pdf">Política de privacidad</a></li>
+            <li><a href="refund.pdf">Política de reembolso</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2025 La Realeza Studios</span>
+      <div class="footer-socials">
+        <a href="https://discord.gg/CSWHyHkRKm"><i class="fab fa-discord"></i></a>
+        <a href="https://github.com/LittleKingPlaysHN"><i class="fab fa-github"></i></a>
+        <a href="https://myuser.gg/clarents"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div id="toast" class="toast"></div>
+
+  <script src="script.js" defer></script>
+</body>
+
+</html>
+
