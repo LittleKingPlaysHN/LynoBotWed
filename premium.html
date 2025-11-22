@@ -3,259 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Premiuns - Lyno Bot</title>
+<title>Premium - Lyno Bot</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="icon" type="image/png" href="/favicon.png">
 <style>
-:root {
-  --accent-1: #0091ff;
-  --accent-2: #0099ff;
-  --muted: #ffffff;
-  --glass: rgba(15,15,30,0.85);
-}
-
-#particle-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-}
-
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #0b0c17;
-  color: var(--muted);
-  position: relative;
-  overflow-x: hidden;
-}
-
-.site-header {
-  background-color: #0a0b17;
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 2;
-  position: relative;
-}
-.site-header .logo {
-  color: var(--accent-2);
-  font-weight: 700;
-  font-size: 1.3rem;
-  text-decoration: none;
-}
-.site-header .nav a {
-  margin-left: 20px;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.site-header .nav a:hover {
-  color: var(--accent-1);
-}
-
-.premium-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin-top: 60px;
-  padding: 0 20px;
-  position: relative;
-  z-index: 1; 
-}
-.premium-layout h2 {
-  color: var(--accent-2);
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.premium-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-}
-
-.premium-card {
-  background: linear-gradient(145deg, rgba(10,10,20,0.85), rgba(20,20,35,0.85));
-  border: 1px solid rgba(0, 145, 255, 0.1);
-  border-radius: 16px;
-  padding: 25px 20px;
-  text-align: center;
-  box-shadow: 0 6px 20px rgba(0, 66, 97, 0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-  z-index: 1;
-}
-.premium-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 30px rgba(0, 174, 255, 0);
-}
-.premium-card h3 {
-  color: var(--accent-1);
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-}
-.premium-card .price {
-  font-size: 1.2rem;
-  color: var(--accent-2);
-  margin-bottom: 12px;
-}
-.premium-card .features {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 20px 0;
-}
-.premium-card .features li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  text-align: left;
-  color: var(--muted);
-}
-.premium-card .features li i {
-  color: var(--accent-1);
-  min-width: 20px;
-  text-align: center;
-}
-
-.premium-card .btn-obtener {
-  display: inline-block;
-  padding: 10px 18px;
-  background: var(--accent-2);
-  color: #fff;
-  border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.premium-card .btn-obtener:hover {
-  background: var(--accent-1);
-}
-
-.site-footer {
-  text-align: center;
-  padding: 30px 20px;
-  color: #ccc;
-  border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.premium-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  margin-top: 60px;
-  padding: 0 20px 60px; 
-  position: relative;
-  z-index: 1;
-}
-
-
-@media(max-width:600px) {
-  .premium-grid {
-    grid-template-columns: 1fr;
+  /* --- VARIABLES Y RESET --- */
+  :root{
+    --bg-1:#0b0c17;
+    --muted:#ffffff;
+    --accent:#0091ff;
+    --accent-1:#0095ff;
+    --accent-2:#00aeff;
+    --glass:#0b0c17;
+    --radius:12px;
+    --text:#ffffff;
+    --maxw:1100px;
   }
-}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:var(--bg-1);color:var(--text);overflow-x:hidden;position:relative;}
+  a{text-decoration:none;color:inherit}
+
+  /* --- PARTICULAS --- */
+  #particle-canvas{
+    position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;
+    mix-blend-mode:screen;opacity:0.9;
+  }
+
+  /* --- HEADER --- */
+  .site-header{
+    position:sticky;top:0;width:100%;z-index:40;
+    background:linear-gradient(180deg, rgba(10,26,47,0.7), rgba(10,26,47,0.3));
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid rgba(255,255,255,0.03);
+  }
+  .site-header .container{
+    max-width:var(--maxw);
+    margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;padding:15px 20px;
+  }
+  .logo{font-weight:800;color:var(--accent);font-size:20px}
+  .nav{display:flex;gap:20px;}
+  .nav a{color:var(--muted);padding:6px 10px;border-radius:8px;transition:all .18s}
+  .nav a:hover{background:rgba(255,255,255,0.1);color:var(--accent-2)}
+  #menu-toggle{display:none;font-size:1.8rem;background:none;border:none;color:#fff;cursor:pointer}
+
+  /* --- PREMIUM GRID --- */
+  .premium-section{max-width:var(--maxw);margin:80px auto;padding:0 20px;position:relative;z-index:1;}
+  .premium-section h2{text-align:center;color:var(--accent-2);margin-bottom:40px;font-size:2rem;}
+  .premium-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px;}
+  @media(max-width:900px){.premium-grid{grid-template-columns:1fr}}
+
+  .premium-card{
+    background:linear-gradient(145deg, rgba(10,10,20,0.85), rgba(20,20,35,0.85));
+    border:1px solid rgba(0,145,255,0.1);
+    border-radius:16px;
+    padding:25px 20px;
+    text-align:center;
+    box-shadow:0 6px 20px rgba(0,66,97,0.15);
+    transition:transform 0.3s,box-shadow 0.3s;
+  }
+  .premium-card:hover{transform:translateY(-8px);box-shadow:0 12px 30px rgba(0,174,255,0.2);}
+  .premium-card h3{color:var(--accent-1);font-size:1.5rem;margin-bottom:10px}
+  .premium-card .price{color:var(--accent-2);font-size:1.2rem;margin-bottom:12px}
+  .premium-card .features{list-style:none;padding:0;margin:0 0 20px 0}
+  .premium-card .features li{display:flex;align-items:center;gap:8px;margin-bottom:8px;text-align:left;color:var(--muted)}
+  .premium-card .features li i{color:var(--accent-1)}
+  .premium-card .btn-obtener{
+    display:inline-block;padding:10px 18px;background:var(--accent-2);
+    color:#fff;border-radius:8px;font-weight:600;transition:background .2s
+  }
+  .premium-card .btn-obtener:hover{background:var(--accent-1)}
+
+  /* --- FOOTER --- */
+  .site-footer{text-align:center;padding:30px 20px;color:#ccc;border-top:1px solid rgba(255,255,255,0.05);}
 </style>
 </head>
 <body>
 
-<canvas id="particle-canvas" aria-hidden="true"></canvas>
+<canvas id="particle-canvas"></canvas>
 
 <header class="site-header">
-  <a class="logo" href="#">Lyno</a>
-  <nav class="nav" id="main-nav">
-    <a href="index.html">Inicio</a>
-    <a href="docs.html">Docs</a>
-    <a href="#premium">Premium</a>
-    <a href="soporte.html">Soporte</a>
-  </nav>
+  <div class="container">
+    <a href="#" class="logo">Lyno</a>
+    <nav class="nav" id="main-nav">
+      <a href="index.html">Inicio</a>
+      <a href="docs.html">Docs</a>
+      <a href="#premium">Premium</a>
+      <a href="soporte.html">Soporte</a>
+    </nav>
+  </div>
 </header>
 
-<main class="container premium-layout">
-  <section id="premium">
-    <h2>Actualiza a Premium</h2>
-    <div class="premium-grid">
-
-
-      <div class="premium-card">
-        <h3>Platino</h3>
-        <p class="price">$1.50 / mes</p>
-        <ul class="features">
-          <li><i class="fas fa-coins"></i> Comando extra /prefix</li>
-          <li><i class="fas fa-smile-beam"></i> Emojis exclusivos</li>
-          <li><i class="fas fa-star"></i> Mayor XP por mensajes</li>
-          <li><i class="fas fa-crown"></i> Acceso a rol premium</li>
-          <li><i class="fas fa-headset"></i> Soporte prioritario</li>
-        </ul>
-        <a href="soporte.html" class="btn-obtener">Obtener Platino</a>
-      </div>
-
-
-      <div class="premium-card">
-        <h3>Diamante</h3>
-        <p class="price">$2.50 / mes</p>
-        <ul class="features">
-          <li><i class="fas fa-coins"></i> Todo en Bronce</li>
-          <li><i class="fas fa-gamepad"></i> Comandos exclusivos de diversión</li>
-          <li><i class="fas fa-star-half-alt"></i> XP doble en eventos</li>
-          <li><i class="fas fa-door-closed"></i> Acceso a salas privadas</li>
-          <li><i class="fas fa-bell"></i> Notificaciones de novedades</li>
-          <li><i class="fas fa-id-badge"></i> Perfil destacado</li>
-        </ul>
-        <a href="soporte.html" class="btn-obtener">Obtener Diamante</a>
-      </div>
-
-
-      <div class="premium-card">
-        <h3>Ascendente</h3>
-        <p class="price">$3.50 / mes</p>
-        <ul class="features">
-          <li><i class="fas fa-gem"></i> Todo en Plata</li>
-          <li><i class="fas fa-shield-alt"></i> Comandos de moderación exclusivos</li>
-          <li><i class="fas fa-star"></i> XP triple en eventos</li>
-          <li><i class="fas fa-gift"></i> Prioridad en sorteos</li>
-          <li><i class="fas fa-flask"></i> Acceso a beta de funciones</li>
-          <li><i class="fas fa-headset"></i> Soporte VIP 24/7</li>
-        </ul>
-        <a href="soporte.html" class="btn-obtener">Obtener Ascendente</a>
-      </div>
-
-      <div class="premium-card">
-        <h3>Inmortal</h3>
-        <p class="price">$4.50 / mes</p>
-        <ul class="features">
-          <li><i class="fas fa-gem"></i> Todo en Oro</li>
-          <li><i class="fas fa-rocket"></i> Acceso a funciones exclusivas</li>
-          <li><i class="fas fa-star"></i> XP cuádruple en eventos</li>
-          <li><i class="fas fa-hand-holding-usd"></i> Descuentos en sorteos</li>
-          <li><i class="fas fa-crown"></i> Rol destacado y personalizado</li>
-          <li><i class="fas fa-headset"></i> Soporte Premium 24/7</li>
-        </ul>
-        <a href="soporte.html" class="btn-obtener">Obtener Inmortal</a>
-      </div>
-
-
-      <div class="premium-card">
-        <h3>Radiante</h3>
-        <p class="price">$5.50 / mes</p>
-        <ul class="features">
-          <li><i class="fas fa-gem"></i> Todo en Platino</li>
-          <li><i class="fas fa-star-of-life"></i> Acceso anticipado a todas las funciones</li>
-          <li><i class="fas fa-star"></i> XP máxima en eventos</li>
-          <li><i class="fas fa-trophy"></i> Participación exclusiva en sorteos VIP</li>
-          <li><i class="fas fa-crown"></i> Rol personalizado especial</li>
-          <li><i class="fas fa-headset"></i> Soporte Ultra VIP 24/7</li>
-        </ul>
-        <a href="soporte.html" class="btn-obtener">Obtener Radiante</a>
-      </div>
-
+<section class="premium-section" id="premium">
+  <h2>Actualiza a Premium</h2>
+  <div class="premium-grid">
+    <div class="premium-card">
+      <h3>Platino</h3>
+      <p class="price">$1.50 / mes</p>
+      <ul class="features">
+        <li><i class="fas fa-coins"></i> Comando extra /prefix</li>
+        <li><i class="fas fa-smile-beam"></i> Emojis exclusivos</li>
+        <li><i class="fas fa-star"></i> Mayor XP por mensajes</li>
+      </ul>
+      <a href="soporte.html" class="btn-obtener">Obtener Platino</a>
     </div>
-  </section>
-</main>
+    <div class="premium-card">
+      <h3>Diamante</h3>
+      <p class="price">$2.50 / mes</p>
+      <ul class="features">
+        <li><i class="fas fa-coins"></i> Todo en Bronce</li>
+        <li><i class="fas fa-gamepad"></i> Comandos exclusivos de diversión</li>
+        <li><i class="fas fa-star-half-alt"></i> XP doble en eventos</li>
+      </ul>
+      <a href="soporte.html" class="btn-obtener">Obtener Diamante</a>
+    </div>
+    <div class="premium-card">
+      <h3>Ascendente</h3>
+      <p class="price">$3.50 / mes</p>
+      <ul class="features">
+        <li><i class="fas fa-gem"></i> Todo en Plata</li>
+        <li><i class="fas fa-shield-alt"></i> Comandos de moderación exclusivos</li>
+        <li><i class="fas fa-star"></i> XP triple en eventos</li>
+      </ul>
+      <a href="soporte.html" class="btn-obtener">Obtener Ascendente</a>
+    </div>
+    <div class="premium-card">
+      <h3>Inmortal</h3>
+      <p class="price">$4.50 / mes</p>
+      <ul class="features">
+        <li><i class="fas fa-gem"></i> Todo en Oro</li>
+        <li><i class="fas fa-rocket"></i> Acceso a funciones exclusivas</li>
+        <li><i class="fas fa-star"></i> XP cuádruple en eventos</li>
+      </ul>
+      <a href="soporte.html" class="btn-obtener">Obtener Inmortal</a>
+    </div>
+  </div>
+</section>
 
 <footer class="site-footer">
   <p>© 2025 La Realeza Studios</p>
@@ -264,33 +146,16 @@ body {
 <script>
 (function(){
   const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas && canvas.getContext ? canvas.getContext('2d') : null;
-  if (!canvas || !ctx) return;
+  const ctx = canvas.getContext('2d');
+  let W,H,particles=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  window.addEventListener('resize',resize);resize();
 
-  let W, H, particles = [], maxP = 80;
-
-  function resize() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  function rand(min, max){ return Math.random()*(max-min)+min; }
-
+  function rand(min,max){return Math.random()*(max-min)+min;}
   function createParticles(){
-    particles = [];
-    const count = Math.min(maxP, Math.floor(W/15));
+    particles=[];const count=Math.min(80,Math.floor(W/15));
     for(let i=0;i<count;i++){
-      particles.push({
-        x: rand(0,W),
-        y: rand(0,H),
-        r: rand(0.8,2.2),
-        vx: rand(-0.3,0.3),
-        vy: rand(-0.3,0.3),
-        hue: rand(190,220),
-        life: rand(40,200)
-      });
+      particles.push({x:rand(0,W),y:rand(0,H),r:rand(0.8,2.2),vx:rand(-0.3,0.3),vy:rand(-0.3,0.3),hue:rand(190,220),life:rand(40,200)});
     }
   }
   createParticles();
@@ -298,52 +163,23 @@ body {
   function step(){
     ctx.clearRect(0,0,W,H);
     for(let p of particles){
-      p.x += p.vx;
-      p.y += p.vy;
-      p.life -= 0.2;
-      if(p.life < 0){ 
-        p.x = rand(0,W); 
-        p.y = rand(0,H); 
-        p.life = rand(40,200); 
-      }
-
-      ctx.beginPath();
-      const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*8);
-      g.addColorStop(0, `hsla(${p.hue},95%,60%,0.12)`);
-      g.addColorStop(0.3, `hsla(${p.hue},95%,60%,0.06)`);
-      g.addColorStop(1, `rgba(0,0,0,0)`);
-      ctx.fillStyle = g;
-      ctx.fillRect(p.x - p.r*8, p.y - p.r*8, p.r*16, p.r*16);
-
-      ctx.beginPath();
-      ctx.fillStyle = `hsla(${p.hue},90%,60%,0.95)`;
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;p.life-=0.2;
+      if(p.life<0){p.x=rand(0,W);p.y=rand(0,H);p.life=rand(40,200);}
+      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*8);
+      g.addColorStop(0,`hsla(${p.hue},95%,60%,0.12)`);g.addColorStop(0.3,`hsla(${p.hue},95%,60%,0.06)`);g.addColorStop(1,`rgba(0,0,0,0)`);
+      ctx.fillStyle=g;ctx.fillRect(p.x-p.r*8,p.y-p.r*8,p.r*16,p.r*16);
+      ctx.beginPath();ctx.fillStyle=`hsla(${p.hue},90%,60%,0.95)`;ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
     }
-
- 
     for(let i=0;i<particles.length;i++){
       for(let j=i+1;j<particles.length;j++){
-        const a = particles[i], b = particles[j];
-        const dx = a.x-b.x, dy = a.y-b.y;
-        const d = Math.sqrt(dx*dx+dy*dy);
-        if(d < 110){
-          ctx.beginPath();
-          ctx.strokeStyle = `rgba(46,117,255,${0.08 * (1 - d/110)})`;
-          ctx.lineWidth = 1;
-          ctx.moveTo(a.x,a.y);
-          ctx.lineTo(b.x,b.y);
-          ctx.stroke();
-        }
+        const a=particles[i],b=particles[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<110){ctx.beginPath();ctx.strokeStyle=`rgba(46,117,255,${0.08*(1-d/110)})`;ctx.lineWidth=1;ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();}
       }
     }
-
     requestAnimationFrame(step);
   }
-
   step();
 })();
 </script>
 </body>
 </html>
-

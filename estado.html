@@ -9,12 +9,68 @@
 <style>
 
 :root {
-  --glass: rgba(0, 16, 87, 0.164);
-  --accent-1: #00a2ff;
-  --accent-2: #60a5fa;
-  --muted: #cbd5e1;
+  --glass: #0b0c17;
+  --accent-1: #0099ff;
+  --accent-2: #00a2ff;
+  --muted: #ffffff;
 }
 
+/* --- BARRA SUPERIOR --- */
+.site-header{
+  position:sticky;
+  top:0;
+  z-index:40;
+backdrop-filter: blur(6px);
+  background:linear-gradient(180deg, rgba(10,26,47,0.7), rgba(10,26,47,0.3));
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.site-header .container{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.logo{
+  font-weight:800;
+  color:var(--accent-1);
+  text-decoration:none;
+  font-size:20px;
+}
+.nav{
+  margin-left:auto;
+  display:flex;
+  gap:18px;
+}
+.nav a{
+  color:var(--muted);
+  text-decoration:none;
+  padding:8px 10px;
+  border-radius:8px;
+  transition:all .18s;
+}
+.nav a:hover{
+  color:var(--accent-2);
+  background:var(--glass);
+}
+#menu-toggle{
+  display:none;
+  cursor:pointer;
+  background:none;
+  border:none;
+  font-size:1.8rem;
+}
+.nav.show{
+  display:flex !important;
+  flex-direction:column;
+  gap:10px;
+  background: #0b0c17;
+  position:absolute;
+  top:60px;
+  right:20px;
+  padding:12px;
+  border-radius:12px;
+}
+
+/* --- FIN BARRA --- */
 
 body {
   margin: 0;
@@ -45,13 +101,11 @@ p.sub {
   margin-right:auto;
 }
 
-
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-
 
 .service-card {
   background: var(--glass);
@@ -62,7 +116,7 @@ p.sub {
 }
 .service-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 110, 255, 0.15);
+  box-shadow: 0 8px 24px #00a2ff;
 }
 
 .service-card h3 {
@@ -98,7 +152,6 @@ p.sub {
   background: radial-gradient(circle at top, #0a0f1a 0%, #000 100%);
 }
 
-
 footer {
   text-align:center;
   padding:20px;
@@ -109,6 +162,14 @@ footer {
 @media(max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
 @media(max-width: 700px) { .services-grid { grid-template-columns: 1fr; } }
 
+/* --- RESPONSIVE BARRA --- */
+@media (max-width: 768px) {
+  #menu-toggle { display: block; }
+  #main-nav { display: none; flex-direction: column; position: absolute; top: 60px; right: 15px; background: #00001b31; padding: 15px; border-radius: 12px; box-shadow: 0 8px 20px #00a2ff00; min-width: 180px;}
+  #main-nav.open { display:flex; }
+  #main-nav a { padding: 10px; border-radius: 8px; color: white; text-decoration:none; }
+  #main-nav a:hover { background: rgba(255,255,255,0.1); }
+}
 </style>
 </head>
 <body>
@@ -123,6 +184,7 @@ footer {
       <a href="premiun.html">Premiun</a>
       <a href="soporte.html">Soporte</a>
     </nav>
+    <button id="menu-toggle">&#9776;</button>
   </div>
 </header>
 
@@ -178,6 +240,12 @@ footer {
 <footer>© 2025 La Realeza Studios</footer>
 
 <script>
+  const menuToggle = document.getElementById('menu-toggle');
+  const mainNav = document.getElementById('main-nav');
+  menuToggle.addEventListener('click', () => {
+    mainNav.classList.toggle('open');
+  });
+
   const canvas = document.getElementById("particle-canvas");
   const ctx = canvas.getContext("2d");
   let particlesArray;
@@ -234,16 +302,11 @@ footer {
     }, interval);
   }
 
-
   dynamicUpdate("bot-uptime", 0.01, 0.05, "%", 3000);
   dynamicUpdate("web-uptime", 0.01, 0.05, "%", 3000);
   dynamicUpdate("bot-ping", 1, 2, " ms", 5000);
   dynamicUpdate("api-ping", 1, 2, " ms", 5000);
-
   slowUpdate("mongo-connections", 900, 950, "", 300000);
-
-
 </script>
 </body>
 </html>
-
